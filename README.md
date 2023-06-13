@@ -35,3 +35,9 @@
   [react-redux](https://react-redux.js.org/).
 - Використай бібліотеку Redux Persist для збереження масиву контактів у
   локальному сховищі
+
+---
+
+npm install styled-components@5.3.10
+
+import styled from 'styled-components';
