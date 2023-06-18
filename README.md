@@ -41,3 +41,9 @@
 npm install styled-components@5.3.10
 
 import styled from 'styled-components';
+
+---
+
+npm i react-redux
+
+import { Provider } from 'react-redux'
