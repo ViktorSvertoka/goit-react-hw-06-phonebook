@@ -47,3 +47,13 @@ import styled from 'styled-components';
 npm i react-redux
 
 import { Provider } from 'react-redux'
+
+---
+
+npm i redux-persist
+
+import { PersistGate } from 'redux-persist/es/integration/react'
+
+---
+
+npm i @reduxjs/toolkit
