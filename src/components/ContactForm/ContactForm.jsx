@@ -3,20 +3,37 @@ import { nanoid } from 'nanoid';
 import { Form, Label, Button, Input } from './ContactForm.styled';
 import { ReactComponent as AddIcon } from '../icons/add.svg';
 
-const ContactForm = ({ onSubmit }) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsSlice';
+
+// Генерация уникальных идентификаторов для полей формы.
+const nameInputId = nanoid();
+const numberInputId = nanoid();
+
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // Генерация уникальных идентификаторов для полей формы.
-  const nameInputId = nanoid();
-  const numberInputId = nanoid();
+  const contacts = useSelector(getVisibleContacts);
+  const dispatch = useDispatch();
 
   // Обработка отправки формы.
   const handleSubmit = event => {
     event.preventDefault();
 
+    const isInContacts = contacts.some(
+      contact => contact.name.toLowerCase().trim() === name.toLowerCase().trim()
+    );
+
+    // Проверяет, существует ли контакт с таким же именем в списке контактов. Если контакт уже существует, выводится предупреждение.
+    if (isInContacts) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
     // Вызов функции onSubmit из родительского компонента с передачей объекта контакта.
-    onSubmit({ name, number });
+    dispatch(addContact({ name, number }));
     setName('');
     setNumber('');
   };
